@@ -1,18 +1,26 @@
-// do not make changes to this file (except to optionally add seeds)
-const sharedConfig = {
-  client: 'sqlite3',
-  useNullAsDefault: true,
-  migrations: { directory: './data/migrations' },
-  pool: { afterCreate: (conn, done) => conn.run('PRAGMA foreign_keys = ON', done) },
-}
+// Update with your config settings.
 
 module.exports = {
+
   development: {
-    ...sharedConfig,
-    connection: { filename: './data/lambda.db3' },
+    client: 'sqlite3',
+    useNullAsDefault : true,
+    connection: {
+      filename: './data/db_file.db3'
+    },
+    // makes it so that when we create our tables they will be made in the folders directed same goes for the seeds below
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds : {
+      directory: './data/seeds'
+    },
+    // Needed to enforce foreign keys
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done)
+      }
+    }
   },
-  testing: {
-    ...sharedConfig,
-    connection: { filename: './data/test.db3' },
-  },
+
 };
