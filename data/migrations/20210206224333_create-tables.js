@@ -11,7 +11,6 @@ exports.up = function(knex) {
       t.string('resource_name', 30).notNullable().unique()
       t.string('resource_description', 128)
   })
-  // A resource assignment connects a resource and a project, and is stored in a project_resources table. You decide what columns to use.
   .createTable('tasks', t => {
       t.increments('task_id')
       t.string('tasK_description').notNullable()
